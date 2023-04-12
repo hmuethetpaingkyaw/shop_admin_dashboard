@@ -14,7 +14,8 @@ function App() {
             <Sidebar />
           </Col>
           <Col>
-            <MainDash />
+          Dashboard
+            {/* <MainDash /> */}
           </Col>
         </Row>
       </Container>
