@@ -1,13 +1,15 @@
 import * as React from "react";
-import "./Table.css";
-import { Button, Container, Table } from "reactstrap";
+import { Button, Table } from "reactstrap";
 
-
-export default function CustomTable() {
+export default function CustomTable({setOpen}) {
   return (
     <div className="mt-5">
       <h3>Dashboard</h3>
-      <Table className="app-table align-items-center table-flush" responsive>
+      <Table
+        className="app-table align-items-center table-flush"
+        responsive
+        bordered
+      >
         <thead className="thead-light">
           <tr>
             <th>No.</th>
@@ -25,10 +27,10 @@ export default function CustomTable() {
             <td>@mdo</td>
             <td>
               <div className="d-flex gap-3">
-                <Button size="sm" color="warning">
+                <Button size="sm" color="warning" onClick={() => setOpen(true)}>
                   Edit
                 </Button>
-                <Button size="sm" color="success">
+                <Button size="sm" color="danger">
                   Delete
                 </Button>
               </div>

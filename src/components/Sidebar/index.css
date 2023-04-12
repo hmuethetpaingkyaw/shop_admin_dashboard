@@ -8,7 +8,8 @@
   /* logo */
   .nav-container {
     min-height: 100vh;
-    background-color: white;
+    /* background-color: white; */
+    border-right: 1px solid rgb(202, 192, 192);
   }
 
   
@@ -56,6 +57,9 @@
     .logo{
       display: none;
     }
+    .menuItem {
+      margin-left: 0rem;
+    }
   }
   
   @media screen and (max-width: 768px) {
@@ -70,6 +74,7 @@
      .nav-container {
     min-height: 0vh;
     background-color: inherit;
+    border: none;
   }
     .menuItem>span{
       display: block;

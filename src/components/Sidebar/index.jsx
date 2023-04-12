@@ -1,67 +1,4 @@
-// import React, { useState } from "react";
-// import "./index.css";
 
-//  import { SidebarData } from "../../Data/Data";
-// import {AiOutlineCloseCircle} from "react-icons/ai";
-
-// const Sidebar = () => {
-//   const [selected, setSelected] = useState(0);
-
-//   const [expanded, setExpaned] = useState(true);
-
-//   const sidebarVariants = {
-//     true: {
-//       left: "0",
-//     },
-//     false: {
-//       left: "-60%",
-//     },
-//   };
-
-//   return (
-//     <>
-//       <div
-//         className="bars"
-//         style={expanded ? { left: "60%" } : { left: "5%" }}
-//         onClick={() => setExpaned(!expanded)}
-//       >
-//        <AiOutlineCloseCircle size={32}/>
-//       </div>
-//       <div
-//         className="sidebar"
-//         variants={sidebarVariants}
-//         animate={window.innerWidth <= 768 ? `${expanded}` : ""}
-//       >
-//         {/* logo */}
-//         <div className="logo">
-//           <img src={Logo} alt="logo" />
-//           <span>
-//             Cola
-//           </span>
-//         </div>
-
-//         <div className="menu">
-//           {SidebarData.map((item, index) => {
-//             return (
-//               <div
-//                 className={selected === index ? "menuItem active" : "menuItem"}
-//                 key={index}
-//                 onClick={() => setSelected(index)}
-//               >
-//                 {/* <item.icon /> */}
-//                 <span>{item.heading}</span>
-//               </div>
-//             );
-//           })}
-//           {/* signoutIcon */}
-//           <div className="menuItem">{/* <UilSignOutAlt /> */}</div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Sidebar;
 import React, { useState } from "react";
 import {
   Navbar,
@@ -73,8 +10,8 @@ import {
   NavbarBrand,
 } from "reactstrap";
 import "./index.css";
-import { SidebarData } from "../../Data/Data";
-import Logo from "../../imgs/logo.png";
+import { routes } from "../../routes";
+import Logo from "../../assets/imgs/logo.png";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(0);
@@ -85,14 +22,14 @@ const Sidebar = () => {
       <Navbar light expand="md">
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto d-flex flex-column gap-3 mt-5" navbar>
+          <Nav className="ml-auto d-flex flex-column gap-3" navbar>
             <NavbarBrand
               href="/"
               className="d-flex justify-content-center"
             >
-              <img src={Logo} width="50" height="50" alt="Logo" />
+              <img src={Logo} width="150" height="150" alt="Logo" />
             </NavbarBrand>
-            {SidebarData.map((item, index) => {
+            {routes.map((route, index) => {
               return (
                 <NavItem
                   className={
@@ -101,9 +38,9 @@ const Sidebar = () => {
                   key={index}
                   onClick={() => setSelected(index)}
                 >
-                  <NavLink href="#">
-                    {item.icon}
-                    {item.heading}
+                  <NavLink href="#" className="d-flex gap-3">
+                    <i className={route.icon}></i>
+                    {route.name}
                   </NavLink>
                 </NavItem>
               );
