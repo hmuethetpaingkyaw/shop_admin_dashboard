@@ -1,6 +1,6 @@
 // import React, { useState } from "react";
 // import "./index.css";
-//  import Logo from "../../imgs/logo.png";
+
 //  import { SidebarData } from "../../Data/Data";
 // import {AiOutlineCloseCircle} from "react-icons/ai";
 
@@ -70,9 +70,11 @@ import {
   Nav,
   NavItem,
   NavLink,
+  NavbarBrand,
 } from "reactstrap";
 import "./index.css";
 import { SidebarData } from "../../Data/Data";
+import Logo from "../../imgs/logo.png";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(0);
@@ -84,6 +86,12 @@ const Sidebar = () => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto d-flex flex-column gap-3 mt-5" navbar>
+            <NavbarBrand
+              href="/"
+              className="d-flex justify-content-center"
+            >
+              <img src={Logo} width="50" height="50" alt="Logo" />
+            </NavbarBrand>
             {SidebarData.map((item, index) => {
               return (
                 <NavItem
@@ -93,7 +101,10 @@ const Sidebar = () => {
                   key={index}
                   onClick={() => setSelected(index)}
                 >
-                  <NavLink href="#">{item.icon}{item.heading}</NavLink>
+                  <NavLink href="#">
+                    {item.icon}
+                    {item.heading}
+                  </NavLink>
                 </NavItem>
               );
             })}
