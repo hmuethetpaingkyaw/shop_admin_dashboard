@@ -1,41 +1,30 @@
 import * as React from "react";
 import { Button, Table } from "reactstrap";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { useContext } from "react";
 
-export default function CustomTable({setOpen}) {
+export default function CustomTable({ title, header, tableBody }) {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <div className="mt-5">
-      <h3>Dashboard</h3>
+      <h3 className={theme === "dark" && "text-white"}>{title}</h3>
       <Table
-        className="app-table align-items-center table-flush"
+        className={`app-table align-items-center table-flush ${
+          theme === "dark" && "text-white"
+        }`}
         responsive
         bordered
       >
         <thead className="thead-light">
           <tr>
-            <th>No.</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>Actions</th>
+            {header.map((head, index) => (
+              <th key={index}>{head}</th>
+            ))}
           </tr>
         </thead>
         <tbody className="list">
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>
-              <div className="d-flex gap-3">
-                <Button size="sm" color="warning" onClick={() => setOpen(true)}>
-                  Edit
-                </Button>
-                <Button size="sm" color="danger">
-                  Delete
-                </Button>
-              </div>
-            </td>
-          </tr>
+          {tableBody}
         </tbody>
       </Table>
     </div>

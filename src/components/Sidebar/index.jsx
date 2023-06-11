@@ -12,10 +12,16 @@ import {
 import "./index.css";
 import { routes } from "../../routes";
 import Logo from "../../assets/imgs/logo.png";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import {useContext} from 'react'
+import { useLocation } from "react-router";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(0);
   const toggle = () => setIsOpen(!isOpen);
+
+  const {theme} = useContext(ThemeContext)
+  const router = useLocation();
+
 
   return (
     <div className="nav-container">
@@ -33,12 +39,11 @@ const Sidebar = () => {
               return (
                 <NavItem
                   className={
-                    selected === index ? "menuItem active" : "menuItem"
+                    router.pathname === route.path ? "menuItem active" : "menuItem"
                   }
                   key={index}
-                  onClick={() => setSelected(index)}
                 >
-                  <NavLink href="#" className="d-flex gap-3">
+                  <NavLink href={route.path} className={`d-flex gap-3 ${theme === 'light' ? 'routeItem' : 'routeItem-dark'}`}>
                     <i className={route.icon}></i>
                     {route.name}
                   </NavLink>

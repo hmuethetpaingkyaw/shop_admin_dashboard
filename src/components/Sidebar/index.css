@@ -24,8 +24,14 @@
     border-radius: 0.7rem;
     font-size: 14px;
     width: 100%;
-  }
   
+  }
+  .routeItem {
+    color: red
+  }
+  .routeItem-dark {
+    color: white;
+  }
   .menuItem:hover {
     cursor: pointer;
   }

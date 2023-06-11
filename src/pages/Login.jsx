@@ -1,6 +1,52 @@
-import { Button, Card, CardBody, CardHeader, Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
+import { useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+} from "reactstrap";
+import { useForm } from "react-hook-form";
+import { ThemeContext } from "../contexts/ThemeContext";
+import {useContext} from 'react'
 
 export default function Login() {
+  const context = useContext(ThemeContext)
+  console.log(context);
+
+
+
+
+
+
+
+  
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    setValue,
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  useEffect(()=> {
+    // setValue('email', 'Hello@gmail.com')
+    // setValue('password', 'hello')
+  },[])
+
+  //const emailWatch = watch('email')
+
   return (
     <Row
       style={{
@@ -15,36 +61,50 @@ export default function Login() {
               backgroundColor: "#ffaabb",
             }}
           >
-            <h5>Coca cola Dashboard</h5>
+            <h5>NextShop Dashboard</h5>
           </CardHeader>
           <CardBody className="p-5">
-            <Form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <FormGroup>
                 <Label for="exampleEmail">Email</Label>
-                <Input
-                  id="exampleEmail"
-                  name="email"
+                <input
+                  className="form-control"
                   placeholder="email"
                   type="email"
+                  {...register("email", { required: true })}
                 />
+                {errors.email && (
+                  <span className="text-danger">Email is required</span>
+                )}
               </FormGroup>
               <FormGroup>
                 <Label for="examplePassword">Password</Label>
-                <Input
-                  id="examplePassword"
-                  name="password"
+                <input
+                  className="form-control"
+                  // id="examplePassword"
+                  // name="password"
                   placeholder="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  {...register("password", { required: true })}
                 />
+                {errors.password && (
+                  <span className="text-danger">Password is required</span>
+                )}
               </FormGroup>
 
-              <FormGroup check>
-                <Input type="checkbox" /> <Label check>Show Password</Label>
+              <FormGroup >
+                <input
+                  type="checkbox"
+                  onChange={() =>
+                    setShowPassword((prevShowPassword) => !prevShowPassword)
+                  }
+                />{" "}
+                <Label check>Show Password</Label>
               </FormGroup>
-              <Button color="danger" className="mt-3">
+              <Button color="danger" className="mt-3" type="submit">
                 Submit
               </Button>
-            </Form>
+            </form>
           </CardBody>
         </Card>
       </Col>

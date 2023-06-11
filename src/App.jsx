@@ -1,32 +1,36 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Sidebar from "./components/Sidebar";
-import { Container, Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
 import Home from "./pages/Home";
-import Order from "./pages/Order";
 import Login from "./pages/Login";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminLayout from "./layouts/AdminLayout";
+import { useState } from "react";
+import { ThemeContext } from "./contexts/ThemeContext";
+import CategoryPage from "./pages/Category";
+import ProductPage from "./pages/Product";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
   return (
-    <div className="App">
-      <Container
-        className="p-0"
-       
-      >
-        <Row className="d-flex justify-content-around">
-          <Col md={3}>
-            <Sidebar />
-          </Col>
-          <Col md={8}>
-            <Home />
-          </Col>
-        </Row>
-
-          {/* <Login/> */}
-      </Container>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Container className="p-0">
+          <BrowserRouter>
+            <Routes>
+              <Route element={<AdminLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/category" element={<CategoryPage />} />
+                <Route path="/product" element={<ProductPage />} />
+              </Route>
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </BrowserRouter>
+        </Container>
+      </div>
+    </Provider>
   );
 }
 
