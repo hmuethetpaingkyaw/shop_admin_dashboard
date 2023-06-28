@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dropdown,
   DropdownToggle,
@@ -6,13 +6,16 @@ import {
   DropdownItem,
 } from "reactstrap";
 import "./index.css";
-import Profile from "../../assets/imgs/profile.png";
+// import Profile from "../../assets/imgs/profile.png";
 import { BsMoon, BsCloudSun } from "react-icons/bs";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../store/actions";
 
 export default function CustomNavBar() {
   const context = useContext(ThemeContext);
+  const dispatch = useDispatch()
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -21,6 +24,13 @@ export default function CustomNavBar() {
   const handleTheme = (theme) => {
     context.setTheme(theme);
   };
+
+  const {user} = useSelector((state)=> state.user)
+  
+  useEffect(()=> {
+    const user = localStorage.getItem('shop_user');
+    dispatch(login(JSON.parse(user)))
+  },[])
 
   return (
     <div className="d-flex mt-3 justify-content-end">
@@ -33,10 +43,10 @@ export default function CustomNavBar() {
           }} />
         )}
       </div>
-      <img src={Profile} width="50" height="50" alt="Logo" />
+      {/* <img src={Profile} width="50" height="50" alt="Logo" /> */}
       <Dropdown isOpen={dropdownOpen} toggle={toggle} direction={"down"}>
         <DropdownToggle className="custom-toggle">
-          <span className={context.theme === 'light' ? '' : 'text-white'}>Mg Mg</span>
+          <span className={context.theme === 'light' ? '' : 'text-white'}>{user?.name}</span>
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem>Log out</DropdownItem>

@@ -1,6 +1,7 @@
 
 const initialState = {
-    products: []
+    products: [] ,
+    product : {}
 }
 
 export const product = (state = initialState, action) => {

@@ -11,16 +11,19 @@ import {
 } from "reactstrap";
 import "./index.css";
 import { routes } from "../../routes";
-import Logo from "../../assets/imgs/logo.png";
+// import Logo from "../../assets/imgs/logo.png";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import {useContext} from 'react'
 import { useLocation } from "react-router";
+import { useSelector } from "react-redux";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   const {theme} = useContext(ThemeContext)
   const router = useLocation();
+
+  const {user} = useSelector((state)=> state.user);
 
 
   return (
@@ -29,13 +32,16 @@ const Sidebar = () => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto d-flex flex-column gap-3" navbar>
-            <NavbarBrand
+            {/* <NavbarBrand
               href="/"
               className="d-flex justify-content-center"
             >
               <img src={Logo} width="150" height="150" alt="Logo" />
-            </NavbarBrand>
+            </NavbarBrand> */}
             {routes.map((route, index) => {
+              if(user?.role === 'Admin' && route.path === '/customer') {
+                return null;
+              }
               return (
                 <NavItem
                   className={

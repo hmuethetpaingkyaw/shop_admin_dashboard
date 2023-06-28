@@ -8,10 +8,10 @@ export default function CustomTable({ title, header, tableBody }) {
 
   return (
     <div className="mt-5">
-      <h3 className={theme === "dark" && "text-white"}>{title}</h3>
+      <h3 className={Boolean(theme === "dark") && "text-white"}>{title}</h3>
       <Table
         className={`app-table align-items-center table-flush ${
-          theme === "dark" && "text-white"
+          Boolean(theme === "dark" ) && "text-white"
         }`}
         responsive
         bordered

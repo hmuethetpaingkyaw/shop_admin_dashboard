@@ -1,15 +1,15 @@
 import { apiCall } from "../../service/apiService";
 
 
-export function getProducts () {
+export function getCategories () {
    return async (dispatch) => {
     dispatch({
       type: 'SET_LOADING',
       payload: true
     })
-    const response = await apiCall('products','get');
+    const response = await apiCall('categorys?_embed=products','get');
      dispatch({
-       type: "SET_PRODUCTS",
+       type: "SET_CATEGORIES",
        payload: response.data,
      });
      dispatch({
